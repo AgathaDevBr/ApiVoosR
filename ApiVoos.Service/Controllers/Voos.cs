@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
+using ApiVoos.Service.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -23,15 +24,21 @@ namespace ApiVoos.Service.Controllers
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonString = await response.Content.ReadAsStringAsync();
-                        dynamic json = JObject.Parse(jsonString);
 
-                        // Processar o JSON dinâmico aqui
-                        // Exemplo: acessando uma lista de objetos
-                        var companhias = new List<dynamic>(json.Companhias);
+                        // Desserializar diretamente para uma lista ou matriz
+                        var companhias = JsonConvert.DeserializeObject<List<CompanhiasAreas>>(jsonString);
 
-                        // Aqui você pode fazer qualquer operação necessária com os dados
-                        // Por exemplo, retornar as companhias como resultado
-                        return Ok(companhias);
+                        // Ordenar, processar ou retornar as companhias conforme necessário
+                        if (companhias != null)
+                        {
+                            // Aqui você pode fazer qualquer operação necessária com os dados
+                            // Por exemplo, retornar as companhias como resultado
+                            return Ok(companhias);
+                        }
+                        else
+                        {
+                            return StatusCode(500, "Erro interno: Não foi possível desserializar os dados do JSON.");
+                        }
                     }
                     else
                     {
