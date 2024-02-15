@@ -27,6 +27,7 @@ namespace ApiVoos.Service.Controllers
 
                         // Desserializar diretamente para uma lista ou matriz
                         var companhias = JsonConvert.DeserializeObject<List<CompanhiasAreas>>(jsonString);
+                         companhias = companhias.OrderBy(x => x.tarifa).ThenBy(x => x.partida).ToList();
 
                         // Ordenar, processar ou retornar as companhias conforme necessário
                         if (companhias != null)
