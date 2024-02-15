@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jOU5STMgWZMwGOssYJnSY7pJfuGSNSwsGEDSZyj67dQ=",
+  "Source": "ApiVoos.Service",
+  "BasePath": "_content/ApiVoos.Service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
